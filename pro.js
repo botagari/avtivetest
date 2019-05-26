@@ -1,10 +1,10 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-var prefix=`!`
+var prefix=`-`
 const moment = require('moment');
 const fs = require('fs');
 var version = '11.0.0';
-var owner = '333239187509870595'
+var owner = '567694723679125514'
 const Bot = new Discord.Client();
 
 let daily = JSON.parse(fs.readFileSync("./daily.json", "utf8")); // يقرا ملف jso
@@ -23,7 +23,7 @@ if(!daily[message.author.id]) {
 let conf = daily[message.author.id];
 
   if (message.author.bot) return;
-  if (message.channel.type !== "text") return;
+  if (message.channel.type !== "ranktext") return;
 
   sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
     if (!row) {
@@ -87,7 +87,7 @@ const w = ['./img/up1.png','./img/up2.png','./img/up.png'];
 
   if (!message.content.startsWith(prefix)) return;
 
-  if (message.content.startsWith(prefix + "لفل")) {
+  if (message.content.startsWith(prefix + "level")) {
    if(!message.channel.guild) return;
     sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
       if (!row) return message.reply("Your current level is 0");
@@ -104,7 +104,7 @@ const w = ['./img/up1.png','./img/up2.png','./img/up.png'];
     });
   }
 
-  if (message.content.startsWith(prefix + "هدية")) {
+  if (message.content.startsWith(prefix + "daily")) {
        if(!message.channel.guild) return message.reply('** This command only for servers**');
     sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
         if (!row) return message.reply("sadly you do not have any points yet!");
@@ -134,14 +134,14 @@ const w = ['./img/up1.png','./img/up2.png','./img/up.png'];
     });
   }
 
-  if(message.content.startsWith(prefix+'تشفير')){
+  if(message.content.startsWith(prefix+'hack')){
      //  if(!message.channel.guild) return message.reply('** This command only for servers**');
       const hex = require('hex.js');
       const args = message.content.split(' ').slice(1).join(' ');
       message.channel.send('تم التشفير: '+hex.hex(args));
   }
 
-  if(message.content.startsWith(prefix+'فك')){
+  if(message.content.startsWith(prefix+'unhack')){
        if(!message.channel.guild) return message.reply('** This command only for servers**');
       const hex = require('hex.js');
       const args = message.content.split(' ').slice(1).join(' ');
@@ -152,7 +152,7 @@ const w = ['./img/up1.png','./img/up2.png','./img/up.png'];
 
 
 
-    if (message.content.startsWith(prefix + "فلوس")) {
+    if (message.content.startsWith(prefix + "credit")) {
        if(!message.channel.guild) return;
       var ment = message.mentions.members.first();
       var getvalueof;
@@ -217,7 +217,7 @@ client.on("message", message => {
 
 });
 client.on("message",  message => {
-    if(message.content.startsWith(prefix + 'ترتيبي')) {
+    if(message.content.startsWith(prefix + 'man')) {
          if(!message.channel.guild) return message.reply('** This command only for servers**');
      var ment = message.mentions.users.first();
       var getvalueof;
@@ -291,7 +291,7 @@ message.channel.stopTyping(1)
     }
 
 
- if(message.content.startsWith(prefix + 'العنوان')) {
+ if(message.content.startsWith(prefix + 'street')) {
      if(!message.channel.guild) return message.reply('** This command only for servers**');
         var args = message.content.split(" ").join(" ").slice(8)
         if (!args) return;
@@ -304,7 +304,7 @@ message.channel.stopTyping(1)
         reps: 'NOT YET',
         repo: 0,
     }
-    if(message.content.startsWith(prefix + 'لايك')) {
+    if(message.content.startsWith(prefix + 'like')) {
       if(!message.channel.guild) return;
                     moment.locale('ar');
         let ment = message.mentions.users.first();
@@ -350,7 +350,7 @@ var prefix =`!`;
         }
     }
 
-    if(message.content.startsWith(prefix + 'خلفيات')) {
+    if(message.content.startsWith(prefix + 'images')) {
         var walls = dataPro[message.author.id].walls;
         for(var wall in walls) {
             console.log(walls[wall]);
@@ -387,19 +387,19 @@ var prefix =`!`;
             }
         }
          var prefix=`!`
-    if(message.content.startsWith(prefix + 'شراء')) {
+    if(message.content.startsWith(prefix + 'buy')) {
         sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
     if (!row) return message.reply("** Pls Try .daily And Try Agin**");
         if (!row) return message.reply("sadly you do not have any points yet!");
         let points = row.points;
         if(!args[0]) {
             let embed = new Discord.RichEmbed()
-.setDescription('**ورقم الخلفية .buy لـشراء خلفية آستخدم آمر  ** ')
-.addField('Profile starwars','Price : $1000 Number: 1')
-.addField('Profile Sun','Preice: $1800 Number: 2')
-.addField('Profile Tree','Price : $2300 Number: 3')
-.addField('Profile Mount','Price: $3000 Number: 4')
-.addField('Profile Old Tree','Price: $4000 Number: 5')
+.setDescription('**ورقم الخلفية -buy لـشراء خلفية آستخدم آمر  ** ')
+.addField('Profile starwars','Price : $5 Number: 1')
+.addField('Profile Sun','Preice: $3 Number: 2')
+.addField('Profile Tree','Price : $7 Number: 3')
+.addField('Profile Mount','Price: $8 Number: 4')
+.addField('Profile Old Tree','Price: $9 Number: 5')
  .setImage("");
             message.channel.send({embed: embed});
         } else {
@@ -427,7 +427,7 @@ var prefix =`!`;
     fs.writeFile('./walls.json', JSON.stringify(dataPro), (err) => {
      if(err) console.log(err.message);
  })
-    if(message.content.startsWith(prefix + 'بروفايل')) {
+    if(message.content.startsWith(prefix + 'profile')) {
          if(!message.channel.guild) return message.reply('** This command only for servers**');
      var ment = message.mentions.users.first();
       var getvalueof;
@@ -546,7 +546,7 @@ message.channel.stopTyping(1)
     }
 
 
-      if(message.content == `${prefix}لفل-اب`) {
+      if(message.content == `${prefix}level-Up`) {
 
           try {
              sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
@@ -617,7 +617,7 @@ const w = ['./img/up1.png','./img/up2.png','./img/up.png'];
 
     try{
     let args = message.content.split(' ').slice(1);
-  if (message.content.startsWith(prefix + 'OWNER')) {
+  if (message.content.startsWith(prefix + 'owner')) {
         if(!message.channel.guild) return message.reply('** This command only for servers**');
     if(message.author.user !== '333239187509870595' && message.author.id !== '415602689100087297') return message.reply('**This Command Just For Admins**')// :|
     console.log(args[0]);
