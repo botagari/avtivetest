@@ -3,7 +3,7 @@ const client = new Discord.Client();
 var prefix = "#"
 
 client.on('guildMemberAdd', (member) => {
-member.addRole(member.guild.roles.find('name', ''));
+member.addRole(member.guild.roles.find('name', 'active'));
 });
  
  
